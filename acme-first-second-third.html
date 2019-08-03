@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <style>
+      h1 {
+        font-size: 3rem;
+        font-family: Arial;
+        text-align: center;
+      }
+      h2 {
+        text-align: center;
+      }
+      #pokeGyms {
+        display: flex;
+        justify-content: center;
+      }
+      .gym {
+        display: flex;
+
+        padding: 1rem;
+        background-color: lightsalmon;
+        flex-direction: column;
+
+      }
+      .pokeClass {
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin: 1rem;
+
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Acme First, Second, Third</h1>
+    <h2>Poke Gyms</h2>
+
+    <div id="pokeGyms">
+
+    </div>
+    <script>
+      const columnCount = 3;
+
+      const pokeList = [
+        {name: "Pikachu", highlight: false, column: 0},
+        {name: "Bulbasaur", highlight: false, column: 0},
+        {name: "Squirtle", highlight: false, column: 1},
+        {name: "Charmandar", highlight: false, column: 2},
+        {name: "Magikarp", highlight: false, column: 2}
+      ];
+
+      const render = ()=>{
+        const grid = document.querySelector("#pokeGyms");
+        let htmlText = '';
+
+        for(let i = 0; i < columnCount; i++){
+
+          htmlText+= `<div class = 'gym'>`;
+
+          htmlText+='<button> < </button>';
+          htmlText+='<button> > </button>';
+
+          pokeList.forEach((pokemon)=>{
+            if(pokemon.column === i){
+              htmlText += `<div class = "pokeClass">${pokemon.name}</div>`;
+            };
+          })
+          htmlText+= '</div>';
+          }
+
+        grid.innerHTML = htmlText;
+
+      };
+
+      render();
+
+    </script>
+  </body>
+
+</html>
