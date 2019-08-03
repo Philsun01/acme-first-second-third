@@ -28,7 +28,9 @@
         padding-left: 1rem;
         padding-right: 1rem;
         margin: 1rem;
-
+      }
+      .highlight{
+        background-color: white;
       }
     </style>
   </head>
@@ -49,6 +51,8 @@
         {name: "Charmandar", highlight: false, column: 2},
         {name: "Magikarp", highlight: false, column: 2}
       ];
+
+
 
       const render = ()=>{
         const grid = document.querySelector("#pokeGyms");
@@ -74,6 +78,11 @@
       };
 
       render();
+
+      const pokeClick = document.querySelectorAll(".pokeClass");
+      console.log(pokeClick);
+
+
 
     </script>
   </body>
