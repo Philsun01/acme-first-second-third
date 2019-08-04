@@ -16,20 +16,35 @@
       }
       .gym {
         display: flex;
-
+        width: 10rem;
         padding: 1rem;
+        margin: 1rem;
+        border: solid 1px green;
+        border-radius: 0.5rem;
         background-color: lightsalmon;
         flex-direction: column;
 
       }
       .pokeClass {
         display: flex;
+        font-family: impact;
         justify-content: center;
         border: 1px solid black;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        width: 4rem;
+        border-radius: 0.5rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         margin: 1rem;
       }
+      button{
+        width: 4rem;
+        border-radius: 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
       .highlight{
         background-color: white;
       }
@@ -56,61 +71,63 @@
         {id: 4, name: "Magikarp", highlight: false, column: 2}
       ];
 
-
-
-
-
       const render = ()=>{
         const grid = document.querySelector("#pokeGyms");
         let htmlText = '';
 
         for(let i = 0; i < columnCount; i++){
+            htmlText+= `<div class = 'gym'>`;
+            htmlText+=`<button id = ${i}> < </button>`;
+            htmlText+=`<button id = ${i}> > </button>`;
+            htmlText+=`<h2>Gym ${i+1}</h2>`;
 
-          htmlText+= `<div class = 'gym'>`;
-
-          htmlText+='<button> < </button>';
-          htmlText+='<button> > </button>';
-
-          pokeList.forEach((pokemon)=>{
-            if(pokemon.column === i){
-              htmlText += `<div id = ${pokemon.id} class = "pokeClass">${pokemon.name}</div>`;
-            };
-          })
-          htmlText+= '</div>';
+            pokeList.forEach((pokemon)=>{
+              if(pokemon.column === i){
+                htmlText += `<div id = ${pokemon.id} class = "pokeClass">${pokemon.name}</div>`;
+                };
+              })
+            htmlText+= '</div>';  //Closing Tag
           }
-
         grid.innerHTML = htmlText;
-
       };
 
-
-      const addQuery = ()=>{
-        const pokeClass = document.querySelectorAll(".pokeClass");
-        const pokemon = [...pokeClass];
+      const addEvents = ()=>{
+        const pokemon = [...document.querySelectorAll(".pokeClass")];
         for(let i in pokemon){
-
+          //Iterate and add Event Listener to each name element
           pokemon[i].addEventListener("click",(ev)=>{
-
-            const current = pokeList[ev.target.id];
-
-            if(current.highlight){
-            ev.target.style.background='white';
-            } else {
-              ev.target.style.background=null;
-            }
-            current.highlight = !current.highlight;
+            const pokeID = pokeList[ev.target.id];
+            pokeID.highlight = !pokeID.highlight;
+            if(pokeID.highlight){
+                ev.target.style.background='white';
+              } else {
+                ev.target.style.background=null;
+              }
           });
-
         };
 
+        const buttons = [...document.querySelectorAll("button")];
+        for(let i in buttons){
+          buttons[i].addEventListener("click",(ev)=>{
+
+            const buttonID = parseInt(ev.target.id);
+
+            pokeList.forEach((obj)=>{
+              if(obj.highlight && obj.column === buttonID){
+
+                obj.column+=1;
+              }
+            })
+            render();
+            addEvents();
+          })
+        }
 
       }
+
       render();
-      addQuery();
-
-
+      addEvents();
 
     </script>
   </body>
-
 </html>
