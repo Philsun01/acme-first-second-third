@@ -1,6 +1,7 @@
 <html>
   <head>
     <style>
+      body{background-color: gray}
       h1 {
         font-size: 3rem;
         font-family: Arial;
@@ -34,7 +35,10 @@
       }
     </style>
   </head>
+
+
   <body>
+
     <h1>Acme First, Second, Third</h1>
     <h2>Poke Gyms</h2>
 
@@ -45,12 +49,14 @@
       const columnCount = 3;
 
       const pokeList = [
-        {name: "Pikachu", highlight: false, column: 0},
-        {name: "Bulbasaur", highlight: false, column: 0},
-        {name: "Squirtle", highlight: false, column: 1},
-        {name: "Charmandar", highlight: false, column: 2},
-        {name: "Magikarp", highlight: false, column: 2}
+        {id: 0, name: "Pikachu", highlight: false, column: 0},
+        {id: 1, name: "Bulbasaur", highlight: false, column: 0},
+        {id: 2, name: "Squirtle", highlight: false, column: 1},
+        {id: 3, name: "Charmandar", highlight: false, column: 2},
+        {id: 4, name: "Magikarp", highlight: false, column: 2}
       ];
+
+
 
 
 
@@ -67,7 +73,7 @@
 
           pokeList.forEach((pokemon)=>{
             if(pokemon.column === i){
-              htmlText += `<div class = "pokeClass">${pokemon.name}</div>`;
+              htmlText += `<div id = ${pokemon.id} class = "pokeClass">${pokemon.name}</div>`;
             };
           })
           htmlText+= '</div>';
@@ -77,10 +83,30 @@
 
       };
 
-      render();
 
-      const pokeClick = document.querySelectorAll(".pokeClass");
-      console.log(pokeClick);
+      const addQuery = ()=>{
+        const pokeClass = document.querySelectorAll(".pokeClass");
+        const pokemon = [...pokeClass];
+        for(let i in pokemon){
+
+          pokemon[i].addEventListener("click",(ev)=>{
+
+            const current = pokeList[ev.target.id];
+
+            if(current.highlight){
+            ev.target.style.background='white';
+            } else {
+              ev.target.style.background=null;
+            }
+            current.highlight = !current.highlight;
+          });
+
+        };
+
+
+      }
+      render();
+      addQuery();
 
 
 
