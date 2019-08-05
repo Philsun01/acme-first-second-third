@@ -111,10 +111,8 @@
           buttons[i].addEventListener("click",(ev)=>{
 
             const buttonID = parseInt(ev.target.id);
-
             pokeList.forEach((obj)=>{
               if(obj.highlight && obj.column === buttonID){
-
                 obj.column+=1;
               }
             })
