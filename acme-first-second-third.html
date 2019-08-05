@@ -1,7 +1,7 @@
 <html>
   <head>
     <style>
-      body{background-color: gray}
+      body{background-color:olivedrab}
       h1 {
         font-size: 3rem;
         font-family: Arial;
@@ -34,6 +34,7 @@
         font-family: impact;
         justify-content: center;
         border: 1px solid black;
+        background-color: lightseagreen;
         width: 4rem;
         border-radius: 0.5rem;
         padding-left: 2rem;
@@ -57,6 +58,11 @@
 
 
   <body>
+    <img src = "pikachu.png" alt = 'pikachu img' width = 40px height = 40px>
+    <img src = "bulbasaur.png" alt = 'bulbasaur img' width = 40px height = 40px>
+    <img src = "charmander.png" alt = 'charmander img' width = 40px height = 40px>
+    <img src = "squirtle.png" alt = 'squirtle img' width = 40px height = 40px>
+    <img src = "jigglypuff.png" alt = 'jigglypuff img' width = 40px height = 40px>
 
     <h1>Acme First, Second, Third</h1>
     <h2>You can have up to 5 Poke Gyms</h2>
@@ -71,11 +77,15 @@
     <script>
 
       const pokeList = [
-        {id: 0, name: "Pikachu", highlight: false, column: 0},
+        {id: 0, name: "Pikachu", highlight: false, column: 0,
+        img: "https://photos.google.com/share/AF1QipNogRX4A68T6HeF5UUNyuYAktKEUMrMhF2kmMvm54y_xngDdkSKL_A2cm7NDfXDwA/photo/AF1QipNtHb8lJXxkf-egfPmIZpgOl9fArEWNLg-YH0x_?key=LUdDQ1JweGJZUFo4N2Flai1PcFB5c0F3OXhfTjNR"},
         {id: 1, name: "Bulbasaur", highlight: false, column: 0},
+        img: ""},
         {id: 2, name: "Squirtle", highlight: false, column: 1},
+        img: ""},
         {id: 3, name: "Charmandar", highlight: false, column: 2},
-        {id: 4, name: "Magikarp", highlight: false, column: 2}
+        img: ""},
+        {id: 4, name: "JigglyPuff", highlight: false, column: 2}
       ];
 
       const render = ()=>{
@@ -149,8 +159,6 @@
       const changeGymCount = document.querySelector('[name="changeGymCount"]');
       changeGymCount.addEventListener("click",(ev)=>{
         const count = parseInt(document.querySelector('[name="gymCount"]').value);
-
-
 
         if(count >= 1 && count <=5){
             //Transfer all Pokemon from removed gym to left gym
