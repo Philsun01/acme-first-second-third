@@ -20,6 +20,9 @@
       }
       .gym {
         display: flex;
+
+
+
         width: 10rem;
         padding: 1rem;
         margin: 1rem;
@@ -31,20 +34,29 @@
       }
       .pokeClass {
         display: flex;
+        flex-direction: column;
+        text-align: center;
         font-family: impact;
         justify-content: center;
         border: 1px solid black;
         background-color: lightseagreen;
-        width: 4rem;
+        width: 5rem;
         border-radius: 0.5rem;
         padding-left: 2rem;
         padding-right: 2rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        margin: 1rem;
+
+      }
+      img {
+        display:flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
       }
       button{
         width: 140px;
+
         border-radius: 0.5rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -58,11 +70,6 @@
 
 
   <body>
-    <img src = "pikachu.png" alt = 'pikachu img' width = 40px height = 40px>
-    <img src = "bulbasaur.png" alt = 'bulbasaur img' width = 40px height = 40px>
-    <img src = "charmander.png" alt = 'charmander img' width = 40px height = 40px>
-    <img src = "squirtle.png" alt = 'squirtle img' width = 40px height = 40px>
-    <img src = "jigglypuff.png" alt = 'jigglypuff img' width = 40px height = 40px>
 
     <h1>Acme First, Second, Third</h1>
     <h2>You can have up to 5 Poke Gyms</h2>
@@ -78,14 +85,15 @@
 
       const pokeList = [
         {id: 0, name: "Pikachu", highlight: false, column: 0,
-        img: "https://photos.google.com/share/AF1QipNogRX4A68T6HeF5UUNyuYAktKEUMrMhF2kmMvm54y_xngDdkSKL_A2cm7NDfXDwA/photo/AF1QipNtHb8lJXxkf-egfPmIZpgOl9fArEWNLg-YH0x_?key=LUdDQ1JweGJZUFo4N2Flai1PcFB5c0F3OXhfTjNR"},
-        {id: 1, name: "Bulbasaur", highlight: false, column: 0},
-        img: ""},
-        {id: 2, name: "Squirtle", highlight: false, column: 1},
-        img: ""},
-        {id: 3, name: "Charmandar", highlight: false, column: 2},
-        img: ""},
-        {id: 4, name: "JigglyPuff", highlight: false, column: 2}
+        img: "<img src = 'pikachu.png' alt = 'pikachu img' width = 40px height = 40px>"},
+        {id: 1, name: "Bulbasaur", highlight: false, column: 0,
+        img: "<img src = 'bulbasaur.png' alt = 'bulbasaur img' width = 40px height = 40px>"},
+        {id: 2, name: "Squirtle", highlight: false, column: 1,
+        img: "<img src = 'squirtle.png' alt = 'squirtle img' width = 40px height = 40px>"},
+        {id: 3, name: "Charmandar", highlight: false, column: 2,
+        img: "<img src = 'charmander.png' alt = 'squirtle img' width = 40px height = 40px>"},
+        {id: 4, name: "JigglyPuff", highlight: false, column: 2,
+        img: "<img src = 'jigglypuff.png' alt = 'jigglypuff.img' width = 40px height = 40px>"}
       ];
 
       const render = ()=>{
@@ -101,7 +109,7 @@
 
             pokeList.forEach((pokemon)=>{
               if(pokemon.column === i){
-                htmlText += `<div id = ${pokemon.id} class = "pokeClass">${pokemon.name}</div>`;
+                htmlText += `<div id = ${pokemon.id} class = "pokeClass">${pokemon.name} <br> ${pokemon.img}</div>`;
                 };
               })
             htmlText+= '</div>';  //Closing Tag
