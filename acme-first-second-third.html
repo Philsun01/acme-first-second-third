@@ -10,6 +10,10 @@
       h2 {
         text-align: center;
       }
+      form {
+        text-align: center;
+      }
+
       #pokeGyms {
         display: flex;
         justify-content: center;
@@ -39,7 +43,7 @@
         margin: 1rem;
       }
       button{
-        width: 4rem;
+        width: 140px;
         border-radius: 0.5rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -55,13 +59,16 @@
   <body>
 
     <h1>Acme First, Second, Third</h1>
-    <h2>Poke Gyms</h2>
+    <h2>You can have up to 5 Poke Gyms</h2>
+    <form>
+      <input type="number" name ="gymCount" value = "3" min = "1" max = "5"/>
+      <input type="button" name = "changeGymCount" value = "Change number of Gyms"/>
+    </form>
 
     <div id="pokeGyms">
 
     </div>
     <script>
-      const columnCount = 3;
 
       const pokeList = [
         {id: 0, name: "Pikachu", highlight: false, column: 0},
@@ -73,12 +80,13 @@
 
       const render = ()=>{
         const grid = document.querySelector("#pokeGyms");
+        const columnCount = parseInt(document.querySelector('[name="gymCount"]').value);
         let htmlText = '';
 
         for(let i = 0; i < columnCount; i++){
-            htmlText+= `<div class = 'gym'>`;
-            htmlText+=`<button id = ${i}> < </button>`;
-            htmlText+=`<button id = ${i}> > </button>`;
+            htmlText+=`<div class = 'gym'>`;
+            htmlText+=`<button id = ${i} class = "subtract"> < </button>`;
+            htmlText+=`<button id = ${i} class = "add"> > </button>`;
             htmlText+=`<h2>Gym ${i+1}</h2>`;
 
             pokeList.forEach((pokemon)=>{
@@ -89,9 +97,12 @@
             htmlText+= '</div>';  //Closing Tag
           }
         grid.innerHTML = htmlText;
-      };
+        //disable first button
+        document.querySelector(".subtract").disabled = true;
+        //disable last button
+        [...document.querySelectorAll(".add")][columnCount-1].disabled = true;
 
-      const addEvents = ()=>{
+        //***** Adding all the event Listeners *****
         const pokemon = [...document.querySelectorAll(".pokeClass")];
         for(let i in pokemon){
           //Iterate and add Event Listener to each name element
@@ -106,25 +117,56 @@
           });
         };
 
-        const buttons = [...document.querySelectorAll("button")];
-        for(let i in buttons){
-          buttons[i].addEventListener("click",(ev)=>{
-
+        const addButtons = [...document.querySelectorAll(".add")];
+        const subtractButtons = [...document.querySelectorAll(".subtract")];
+        for(let i in addButtons){
+          addButtons[i].addEventListener("click",(ev)=>{
             const buttonID = parseInt(ev.target.id);
             pokeList.forEach((obj)=>{
               if(obj.highlight && obj.column === buttonID){
                 obj.column+=1;
+                obj.highlight = false;
               }
             })
             render();
-            addEvents();
+          })
+        }
+        for(let i in subtractButtons){
+          subtractButtons[i].addEventListener("click",(ev)=>{
+            const buttonID = parseInt(ev.target.id);
+            pokeList.forEach((obj)=>{
+              if(obj.highlight && obj.column === buttonID){
+                obj.column-=1;
+                obj.highlight = false;
+              }
+            })
+            render();
           })
         }
 
-      }
+      };
+
+      const changeGymCount = document.querySelector('[name="changeGymCount"]');
+      changeGymCount.addEventListener("click",(ev)=>{
+        const count = parseInt(document.querySelector('[name="gymCount"]').value);
+
+
+
+        if(count >= 1 && count <=5){
+            //Transfer all Pokemon from removed gym to left gym
+              pokeList.forEach((obj)=>{
+                if(obj.column > count-1){
+                  obj.column = count-1;
+                }
+              })
+
+          render();
+        } else {
+            alert("Pick between 1 and 5 gyms");
+          }
+      });
 
       render();
-      addEvents();
 
     </script>
   </body>
